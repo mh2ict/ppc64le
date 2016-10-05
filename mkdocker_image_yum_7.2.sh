@@ -101,7 +101,7 @@ NETWORKING=yes
 HOSTNAME=localhost.localdomain
 EOF
 
-cat > /etc/motd << EOF
+cat > "$target"/etc/motd << EOF
 
    =======   ============     ======       ======
    =======   ==============   =======     =======
