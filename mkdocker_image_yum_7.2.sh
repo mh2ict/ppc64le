@@ -86,6 +86,8 @@ if [[ -n "$install_groups" ]];
 then
     yum -c "$yum_config" --installroot="$target" --releasever=/ --setopt=tsflags=nodocs \
         --setopt=group_package_types=mandatory,default,optional -y groupinstall $install_groups
+    yum -c "$yum_config" --installroot="$target" --releasever=/ --setopt=tsflags=nodocs \
+        --setopt=group_package_types=mandatory -y install yum net-tools iputils 
 fi
 
 if [[ -n "$install_packages" ]];
@@ -93,6 +95,19 @@ then
     yum -c "$yum_config" --installroot="$target" --releasever=/ --setopt=tsflags=nodocs \
         --setopt=group_package_types=mandatory -y install $install_packages
 fi
+
+##### Just To Avoid The You Related Error #####
+#
+# Loaded plugins: product-id, search-disabled-repos, subscription-manager
+# This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+# There are no enabled repos.
+#  Run "yum repolist all" to see the repos you have.
+#  You can enable repos with yum-config-manager --enable <repo>
+#
+##
+# Here, We just use our local repo file
+##
+cp /etc/yum.repos.d/server.repo "$target"/etc/yum.repos.d/
 
 yum -c "$yum_config" --installroot="$target" -y clean all
 
