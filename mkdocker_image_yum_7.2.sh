@@ -86,8 +86,6 @@ if [[ -n "$install_groups" ]];
 then
     yum -c "$yum_config" --installroot="$target" --releasever=/ --setopt=tsflags=nodocs \
         --setopt=group_package_types=mandatory,default,optional -y groupinstall $install_groups
-    yum -c "$yum_config" --installroot="$target" --releasever=/ --setopt=tsflags=nodocs \
-        --setopt=group_package_types=mandatory -y install yum net-tools iputils 
 fi
 
 if [[ -n "$install_packages" ]];
